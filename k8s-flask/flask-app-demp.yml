@@ -1,0 +1,33 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: flask-deployment
+  namespace: taherseks
+  labels:
+    name: flask-app
+
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+       name: flask-app
+  template:
+    metadata:
+      labels:
+        name: flask-app
+    spec:
+      containers:
+        - name: flask-app-pod
+          image: trainwithshubham/flaskapp:latest
+          env:
+            - name: MYSQL_HOST
+              value: "mysql"
+            - name: MYSQL_USER
+              value: "root"
+            - name: MYSQL_PASSWORD
+              value: "admin"
+            - name: MYSQL_DB
+              value: "mydb"
+          ports:
+            - containerPort: 5000
+          imagePullPolicy: Always

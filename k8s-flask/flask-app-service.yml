@@ -1,0 +1,15 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: flask-app-service
+  namespace: taherseks
+
+spec:
+  type: NodePort
+  selector:
+    name: flask-app
+  ports:
+    - protocol: TCP
+      port: 80
+      targetPort: 5000
+      nodePort: 30007
